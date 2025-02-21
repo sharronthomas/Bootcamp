@@ -1,0 +1,37 @@
+body{
+    background-color: white;
+}
+ 
+
+div{
+    font-size: x-large;
+    text-align: center;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    padding: 20px;
+    background-color:rgb(255, 228, 155);
+
+}
+ul {
+    background-color:black;
+    padding: 10px;
+    text-align: center;
+    margin-top: auto;
+}
+
+li {
+    display: inline;
+    margin-right: 50px;
+}
+p{
+    font-size: large;
+    font-style: oblique;
+}
+
+a {
+    color:white;
+}
+
+.tag{
+    color: rgb(230, 13, 13);
+    margin-top: -25px;
+}
