@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timer & Stopwatch</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        .container {
+            max-width: 300px;
+            margin: auto;
+            padding: 20px;
+            border: 2px solid #000;
+            border-radius: 10px;
+        }
+        .time-display {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+        button {
+            margin: 5px;
+            padding: 10px 20px;
+            font-size: 1em;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Timer & Stopwatch</h2>
+        <div class="time-display" id="display">00:00:00</div>
+        <button onclick="start()">Start</button>
+        <button onclick="stop()">Stop</button>
+        <button onclick="reset()">Reset</button>
+        <button onclick="toggleMode()">Toggle Mode</button>
+        <p id="mode">Mode: Stopwatch</p>
+    </div>
+
+    <script>
+        let time = 0;
+        let interval;
+        let running = false;
+        let isCountdown = false;
+
+        function formatTime(seconds) {
+            let hrs = Math.floor(seconds / 3600).toString().padStart(2, '0');
+            let mins = Math.floor((seconds % 3600) / 60).toString().padStart(2, '0');
+            let secs = (seconds % 60).toString().padStart(2, '0');
+            return `${hrs}:${mins}:${secs}`;
+        }
+
+        function updateDisplay() {
+            document.getElementById("display").innerText = formatTime(time);
+        }
+
+        function start() {
+            if (!running) {
+                running = true;
+                interval = setInterval(() => {
+                    if (isCountdown) {
+                        if (time > 0) {
+                            time--;
+                        } else {
+                            stop();
+                            alert("Time's up!");
+                        }
+                    } else {
+                        time++;
+                    }
+                    updateDisplay();
+                }, 1000);
+            }
+        }
+
+        function stop() {
+            running = false;
+            clearInterval(interval);
+        }
+
+        function reset() {
+            stop();
+            time = isCountdown ? 60 : 0;
+            updateDisplay();
+        }
+
+        function toggleMode() {
+            stop();
+            isCountdown = !isCountdown;
+            document.getElementById("mode").innerText = isCountdown ? "Mode: Countdown (1 min)" : "Mode: Stopwatch";
+            time = isCountdown ? 60 : 0;
+            updateDisplay();
+        }
+
+        updateDisplay();
+    </script>
+</body>
+</html>
